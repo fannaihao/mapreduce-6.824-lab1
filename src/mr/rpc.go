@@ -24,6 +24,42 @@ type ExampleReply struct {
 
 // Add your RPC definitions here.
 
+type RegisterArgs struct {
+	Current_id int64
+}
+
+type RegisterReply struct {
+	Worker_id int64
+}
+
+type RequestTaskArgs struct {
+	Worker_id int64
+}
+
+type RequestTaskReply struct {
+	Task_type       TaskType 
+	Task_id         int64
+	Reduce_num      int64   //used only in map tasks, to slice bucket
+	Input_file_name string  //used only in map tasks, the input file name
+	Map_task_ids    []int64 //used in reduce task, to find intermediate files
+}
+
+type ReportMapTaskDoneArgs struct {
+	Worker_id       int64
+	Input_file_name string
+	Task_id         int64
+}
+
+type ReportMapTaskDoneReply struct {
+}
+
+type ReportReduceTaskDoneArgs struct {
+	Worker_id int64
+	Task_id int64
+}
+type ReportReduceTaskDoneReply struct {
+
+}
 
 // Cook up a unique-ish UNIX-domain socket name
 // in /var/tmp, for the master.
